@@ -1,6 +1,6 @@
 # mkauth
 
-`mkauth` is an experimental authentication server in Go, built to be compatible with OpenID Connect (OIDC) and OAuth 2.0 to begin with. Idea is to stick to RFC and implementing as much of the specifications as possible to serve as a robust auth server. This is a hobby project to creat my own Auth server. 
+`mkauth` is an hobby  authentication server in Go, built to be compatible with OpenID Connect (OIDC) and OAuth 2.0 to begin with. Idea is to stick to RFC and implementing as much of the specifications as possible to serve as a robust auth server. This is a hobby project to creat my own Auth server. 
 
 ## Stack
 - **Go** – for backend logic and API implementation

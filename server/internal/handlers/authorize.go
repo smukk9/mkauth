@@ -24,6 +24,8 @@ func AuthorizeEndpoint() http.HandlerFunc {
 			return
 		}
 
+		//does the session already exists. 
+
 		// generate code and redirect
 		code, err := generateAuthCode(16)
 
