@@ -1,0 +1,7 @@
+*.exe
+.env
+pb_data/
+pb_test/
+logs/
+.idea/
+.vscode/
