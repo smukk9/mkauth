@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(go mod edit:*)",
+      "Bash(go mod tidy:*)",
+      "Bash(MKAUTH_FILE=config.yaml go build:*)",
+      "Bash(go get:*)",
+      "Bash(curl:*)",
+      "Bash(sqlite3:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

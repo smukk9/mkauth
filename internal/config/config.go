@@ -11,14 +11,26 @@ import (
 var ErrEnvVarNotSet = errors.New("config env MKAUTH_FILE is not set")
 
 type Config struct {
-	Server Server
+	Server   Server
+	Database Database
+	Admin    Admin
 }
 
 type Server struct {
-	Port    string
+	Port    int
+	Host    string
 	Mode    string
 	Version string
 	Service string
+}
+
+type Database struct {
+	Path string
+}
+
+type Admin struct {
+	Email    string
+	Password string
 }
 
 func Load() (*Config, error) {

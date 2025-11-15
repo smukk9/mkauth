@@ -21,10 +21,19 @@ func TestLoad_withDefaults(t *testing.T) {
 	path := filepath.Join(dir, "config.yaml")
 	yaml := `
 server:
-  port: 8080
+  port: 8088
+  host: 0.0.0.0
   mode: release
   service: MkAuth
   version: v0.1.0
+
+database:
+  path: ./pb_data
+
+admin:
+  email: admin@mkauth.local
+  password: changeme123
+
 `
 	os.WriteFile(path, []byte(yaml), 0644)
 
@@ -35,7 +44,7 @@ server:
 		t.Fatalf("expected error, got %v", err)
 	}
 
-	if config.Server.Port != "8080" {
+	if config.Server.Port != 8088 {
 		t.Fatalf("extened port 8080, got %v", config.Server.Port)
 	}
 }
@@ -46,9 +55,20 @@ func TestLoad_YAMLParsingError(t *testing.T) {
 
 	// Intentionally invalid YAML
 	yaml := `
-server:
-  	port: 8080
-  mode: release
+	server:
+	port: 8088
+	host: 0.0.0.0
+	mode: release
+	service: MkAuth
+	version: v0.1.0
+
+	database:
+	path: ./pb_data
+
+	admin:
+	email: admin@mkauth.local
+	password: changeme123
+
 `
 	os.WriteFile(path, []byte(yaml), 0644)
 	os.Setenv("MKAUTH_FILE", path)
