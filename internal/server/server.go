@@ -9,6 +9,7 @@ import (
 	"github.com/smukk9/mkauth/internal/config"
 	"github.com/smukk9/mkauth/internal/db"
 	"github.com/smukk9/mkauth/internal/health"
+	"github.com/smukk9/mkauth/internal/user"
 	webhandlers "github.com/smukk9/mkauth/internal/web/handlers"
 )
 
@@ -42,6 +43,7 @@ func (s *Server) registerRoutes() {
 	// Register health routes
 	health.RegisterRoutes(s.mux, s.db, s.cfg)
 	client.RegisterRoutes(s.mux, s.db, s.cfg)
+	user.RegisterRoutes(s.mux, s.db, s.cfg)
 	s.registerWebRoutes()
 	// Future: Register user routes
 	// user.RegisterRoutes(s.mux, s.db, s.cfg)
