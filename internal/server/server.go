@@ -5,9 +5,11 @@ import (
 	"log"
 	"net/http"
 
+	"github.com/smukk9/mkauth/internal/client"
 	"github.com/smukk9/mkauth/internal/config"
 	"github.com/smukk9/mkauth/internal/db"
 	"github.com/smukk9/mkauth/internal/health"
+	webhandlers "github.com/smukk9/mkauth/internal/web/handlers"
 )
 
 type Server struct {
@@ -39,7 +41,8 @@ func New(cfg *config.Config, db *db.Database) (*Server, error) {
 func (s *Server) registerRoutes() {
 	// Register health routes
 	health.RegisterRoutes(s.mux, s.db, s.cfg)
-
+	client.RegisterRoutes(s.mux, s.db, s.cfg)
+	s.registerWebRoutes()
 	// Future: Register user routes
 	// user.RegisterRoutes(s.mux, s.db, s.cfg)
 
@@ -55,4 +58,16 @@ func (s *Server) Start() error {
 func (s *Server) Shutdown() error {
 	log.Println("Shutting down server...")
 	return s.db.Close()
+}
+
+func (s *Server) registerWebRoutes() {
+	// Create base handler with dependencies
+	baseHandler := webhandlers.New(s.cfg, s.db)
+
+	// Create page-specific handlers
+	homeHandler := webhandlers.NewHomeHandler(baseHandler)
+	// clientsPageHandler := handlers.NewClientsPageHandler(baseHandler)
+
+	// Register routes
+	s.mux.HandleFunc("GET /", homeHandler.ServeHTTP)
 }

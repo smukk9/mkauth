@@ -1,4 +1,4 @@
-package health
+package client
 
 import (
 	"net/http"
@@ -10,5 +10,6 @@ import (
 func RegisterRoutes(mux *http.ServeMux, db *db.Database, cfg *config.Config) {
 	handler := NewHandler(db, cfg)
 
-	mux.HandleFunc("GET /health", handler.Health)
+	mux.HandleFunc("GET /client", handler.GetClients)
+	mux.HandleFunc("POST /client", handler.StoreClient)
 }

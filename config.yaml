@@ -6,8 +6,4 @@ server:
   version: v0.1.0
 
 database:
-  path: ./pb_data
-
-admin:
-  email: admin@mkauth.local
-  password: changeme123
+  path: ./data/mkauth.sqlite
